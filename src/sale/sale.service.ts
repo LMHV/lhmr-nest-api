@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { Sale } from "@prisma/client";
 import { PrismaService } from "src/prisma/prisma.service";
-import { CreateSaleDTO, DeleteSaleDTO } from "./sale.dto";
+import { CreateSaleDTO } from "./dto/create-sale.dto";
+import { DeleteSaleDTO } from "./dto/delete-sal.dto";
 
 @Injectable()
 export class SaleService {

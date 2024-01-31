@@ -5,7 +5,3 @@ export class CreateSaleDTO {
   readonly products: JsonObject;
 }
 
-export class DeleteSaleDTO {
-  readonly userId: string;
-  readonly saleId: number;
-}

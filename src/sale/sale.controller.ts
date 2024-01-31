@@ -1,6 +1,7 @@
 import { Body, Controller, Get, NotFoundException, Param, Post, Delete, Query } from "@nestjs/common";
 import { SaleService } from "./sale.service";
-import { CreateSaleDTO, DeleteSaleDTO } from "./sale.dto";
+import { CreateSaleDTO } from "./dto/create-sale.dto";
+import { DeleteSaleDTO } from "./dto/delete-sal.dto";
 
 @Controller('/api/sales')
 export class SaleController {
