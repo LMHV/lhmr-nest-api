@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Product {
+  id               Int     @id @unique @default(autoincrement())
+  userId           String?
+  productName      String
+  price            Float
+  measurementUnits String
+  stock            Float
+
+  @@unique([userId, productName])
+  @@index([userId])
+}
+
+model Sale {
+  id       Int      @id @unique @default(autoincrement())
+  userId   String?
+  date     DateTime @default(now())
+  products Json
+
+  @@index([userId])
+}
+
+model User {
+  id                 Int       @id @unique @default(autoincrement())
+  externalId         String    @unique
+  username           String    @unique
+  email              String    @unique
+  creationDate       DateTime  @default(now())
+  lastActivityDate   DateTime?
+  subscriptionStatus String?
+  subscriptionPlan   String?
+}
