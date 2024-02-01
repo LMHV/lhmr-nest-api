@@ -26,7 +26,12 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "^5.9.0",
+<<<<<<< HEAD
     "body-parser": "^1.20.2",
+=======
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+>>>>>>> 5d62f86afd903fd646c0019d21a2195a93a4a2e3
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "svix": "^1.16.0"
