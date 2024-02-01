@@ -1,16 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-// import { CreateUserDto } from './dto/create-user.dto';
-// import { UpdateUserDto } from './dto/update-user.dto';
+import { UserJSON } from '@clerk/clerk-sdk-node';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) { }
 
-  // create(createUserDto: CreateUserDto) {
-  //   return 'This action adds a new user';
-  // }
+  async create(data: UserJSON) {
+    try {
+      await this.prisma.user.create({
+        data: {
+          externalId: data.id!,
+          username: 'hola',
+          email: data.email_addresses[0].email_address,
+          subscriptionStatus: 'No Abonado',
+          subscriptionPlan: 'Sin plan',
+        }
+      })
+
+    } catch (error) {
+      throw new Error('error')
+    }
+  }
 
   async findAll(): Promise<User[]> {
     return this.prisma.user.findMany()
