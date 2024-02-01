@@ -12,7 +12,7 @@ export class UserService {
       await this.prisma.user.create({
         data: {
           externalId: data.id!,
-          username: 'hola',
+          username: data.username!,
           email: data.email_addresses[0].email_address,
           subscriptionStatus: 'No Abonado',
           subscriptionPlan: 'Sin plan',
