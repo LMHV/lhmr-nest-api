@@ -10,7 +10,7 @@ export class ProductService {
 
   async createProduct(product: CreateProductDTO): Promise<Product> {
     const { userId, productName, price, measurementUnits, stock } = product
-    const response = this.prisma.product.create({
+    const response = await this.prisma.product.create({
       data: {
         userId,
         productName,
@@ -23,7 +23,7 @@ export class ProductService {
   }
 
   async getProductsByUserId(userId: string): Promise<Product[]> {
-    const products = this.prisma.product.findMany({
+    const products = await this.prisma.product.findMany({
       where: {
         userId
       }
@@ -32,7 +32,7 @@ export class ProductService {
   }
 
   async updateProductPrice(id: number, productPrice: number): Promise<Product> {
-    const updatedProduct = this.prisma.product.update({
+    const updatedProduct = await this.prisma.product.update({
       where: {
         id
       },
