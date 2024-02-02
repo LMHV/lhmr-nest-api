@@ -1,7 +1,6 @@
-import { Body, Controller, Get, Param, Post, Delete, Query, HttpException, HttpStatus } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Delete, HttpException, HttpStatus, ParseIntPipe } from "@nestjs/common";
 import { SaleService } from "./sale.service";
 import { CreateSaleDTO } from "./dto/create-sale.dto";
-import { DeleteSaleDTO } from "./dto/delete-sal.dto";
 
 @Controller('/api/sales')
 export class SaleController {
@@ -15,8 +14,8 @@ export class SaleController {
   @Get(':userId')
   async getSaleByUserId(@Param('userId') userId: string) {
     const salesFound = await this.saleService.getSaleByUserId(userId)
-    
-    if(!salesFound.length) {
+
+    if (!salesFound.length) {
       throw new HttpException({
         message: 'No se encontraron ventas para el usuario',
         sales: []
@@ -32,8 +31,8 @@ export class SaleController {
   @Get('recent/:userId')
   async getRecentSalesByUserId(@Param('userId') userId: string) {
     const recentSales = await this.saleService.getRecentSalesByUserId(userId)
-    
-    if(!recentSales.length) {
+
+    if (!recentSales.length) {
       return {
         message: 'No se realizaron ventas',
         sales: [],
@@ -52,9 +51,9 @@ export class SaleController {
     return sale
   }
 
-  @Delete()
-  async deleteSale(@Query() query: DeleteSaleDTO) {
-    const sale = await this.saleService.deleteSale(query)
+  @Delete('/:userId/:saleId')
+  async deleteSale(@Param('userId') userId: string, @Param('saleId', ParseIntPipe) saleId: number) {
+    const sale = await this.saleService.deleteSale(userId, saleId)
     return sale
   }
 }

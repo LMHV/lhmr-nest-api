@@ -1,14 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator'
-
-enum measurementTypes {
-  uds = 'uds',
-  mg = 'mg',
-  g = 'g',
-  kg = 'kg',
-  tn = 'tn',
-}
-
-
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 export class CreateProductDTO {
   @IsString()
   @IsNotEmpty()
@@ -24,7 +14,6 @@ export class CreateProductDTO {
 
   @IsString()
   @IsNotEmpty()
-  @IsEnum([measurementTypes])
   measurementUnits: string;
 
   @IsNumber()

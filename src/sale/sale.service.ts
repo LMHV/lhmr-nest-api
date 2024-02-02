@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { Sale } from "@prisma/client";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateSaleDTO } from "./dto/create-sale.dto";
-import { DeleteSaleDTO } from "./dto/delete-sal.dto";
 
 @Injectable()
 export class SaleService {
@@ -43,9 +42,7 @@ export class SaleService {
     return response
   }
 
-  async deleteSale(query: DeleteSaleDTO): Promise<Sale> {
-    const { userId, saleId } = query
-
+  async deleteSale(userId: string, saleId: number): Promise<Sale> {
     const response = await this.prisma.sale.delete({
       where: {
         userId,

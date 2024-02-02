@@ -8,6 +8,7 @@ export class ProductController {
 
   @Post()
   async createProduct(@Body() createProductDTO: CreateProductDTO) {
+    console.log(createProductDTO)
     const product = await this.productService.createProduct(createProductDTO)
     if (!product) {
       throw new NotFoundException('No se pudo crear el producto')
