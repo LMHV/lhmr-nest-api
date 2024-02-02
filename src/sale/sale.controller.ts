@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Delete, HttpException, HttpStatus, ParseIntPipe } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Delete, ParseIntPipe } from "@nestjs/common";
 import { SaleService } from "./sale.service";
 import { CreateSaleDTO } from "./dto/create-sale.dto";
 
@@ -16,10 +16,10 @@ export class SaleController {
     const salesFound = await this.saleService.getSaleByUserId(userId)
 
     if (!salesFound.length) {
-      throw new HttpException({
+      return {
         message: 'No se encontraron ventas para el usuario',
         sales: []
-      }, HttpStatus.NO_CONTENT)
+      }
     }
     return {
       sales: salesFound,
