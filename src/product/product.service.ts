@@ -42,4 +42,15 @@ export class ProductService {
     })
     return updatedProduct
   }
+
+  async deleteProduct(userId: string, productId: number) {
+    const deletedProduct = await this.prisma.product.delete({
+      where: {
+        userId,
+        id: productId
+      }
+    })
+
+    return deletedProduct
+  }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDTO } from './dto/create-product.dto';
 
@@ -8,7 +8,7 @@ export class ProductController {
 
   @Post()
   async createProduct(@Body() createProductDTO: CreateProductDTO) {
-    console.log(createProductDTO)
+    // console.log(createProductDTO)
     const product = await this.productService.createProduct(createProductDTO)
     if (!product) {
       throw new NotFoundException('No se pudo crear el producto')
@@ -39,5 +39,17 @@ export class ProductController {
       throw new Error('No se pudo actualizar el precio del producto')
     }
     return updatedProduct
+  }
+
+  @Delete('/:userId/:productId')
+  async deleteProduct(@Param('userId') userId: string, @Param('productId', ParseIntPipe) productId: number) {
+    const product = await this.productService.deleteProduct(userId, productId)
+    if(!product) {
+      return {
+        message: 'No se encontró producto',
+      }
+    }
+
+    return product
   }
 }
